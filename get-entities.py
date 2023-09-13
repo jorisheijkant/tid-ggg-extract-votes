@@ -13,8 +13,13 @@ lines = []
 for filename in os.listdir(chunk_folder):
     if filename.endswith(".json"):
         with open(f"{chunk_folder}/{filename}") as f:
-            lines.extend(json.load(f))
-print(f"Found {len(lines)} lines in the chunks folder")
+            json_file = json.load(f)
+            # Pick the first five lines from the file and add them to the lines array
+            for index, line in enumerate(json_file):
+                if(index < 5):
+                    lines.append(line)
+                
+print(f"Found {len(lines)} lines in the chunks folder that we are going to scan for parties")
 
 # Import the keys and url from the constants file
 import constants
@@ -32,6 +37,7 @@ Als je deze vind, dan geef je een json object terug met de volgende structuur:
 - "abbreviation": de afkorting van de politieke partij
 Gebruik hierbij eventueel je kennis van de Nederlandse politiek en de politiek in Helmond om het object aan te vullen als je alleen een partij of afkorting vindt.
 Vind je geen partijen? Geef dan Null (met hoofdletter) terug.
+Let op: B&W, Burgmeesters en Wethouders, Gemeenteraad en Raad zijn geen politieke partijen.
 
 Context: 
 {context}
