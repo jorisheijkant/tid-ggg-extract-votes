@@ -6,7 +6,14 @@ The vote extractor is written in Python. It requires a newer version of python3 
 ```
 pip install -r requirements.txt
 ```
-It can be useful to work with a virtual environment manager here, such as conda, to avoid conflicts with other python projects and bloated systems. 
+It can be useful to work with a virtual environment manager here, such as conda, to avoid conflicts wi th other python projects and bloated systems. 
+
+## OpenAI key
+Some of the scripts require an OpenAI key to access the OpenAI API. Save the key in a file named `constants.py` as follows:
+```
+APIKEY = "your-key-here"
+```
+Do NOT commit that file. 
 
 ## Scripts
 As for now, the project contains several scripts that all do one part of the process. Later they can be merged into one pipeline, but for now this allows easy debugging and testing of the different parts. Make sure to run them in this order.
