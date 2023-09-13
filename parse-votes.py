@@ -3,7 +3,7 @@ import json
 import csv
 
 # Set folder path
-folder_path = "data/voting-test/"
+folder_path = "data/helmond/"
 results_path = f"{folder_path}votes/"
 files = []
 files_in_root = [f.path for f in os.scandir(results_path) if f.is_file() and f.name.endswith(".json") and not f.name.endswith("-raw.json")]

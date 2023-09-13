@@ -1,0 +1,69 @@
+[
+    {
+        "title": "amendement",
+        "vote": "Het amendement is verworpen.",
+        "pro": [
+            "CDA",
+            "M\u00ec Hellemonders",
+            "Helder Helmond",
+            "Forum voor Democratie"
+        ],
+        "against": [
+            "GL",
+            "VVD",
+            "HH",
+            "SP",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ]
+    },
+    {
+        "title": "Raadsvoorstel 27",
+        "vote": "het voorstel is aangenomen",
+        "pro": [
+            "GL",
+            "VVD",
+            "HH",
+            "SP",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ],
+        "against": [
+            "Forum",
+            "CDA",
+            "Helder Helmond"
+        ]
+    },
+    {
+        "title": "Vaststellen bestemmingsplan Buitengebied - Lieshoutseweg 76",
+        "vote": "het is aangenomen",
+        "pro": [
+            "GL",
+            "VVD",
+            "HH",
+            "SP",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ],
+        "against": [
+            "Forum",
+            "CDA",
+            "Helder Helmond"
+        ]
+    }
+]

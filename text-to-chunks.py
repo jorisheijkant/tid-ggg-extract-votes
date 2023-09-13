@@ -13,7 +13,7 @@ import constants
 text_splitter = RecursiveCharacterTextSplitter(chunk_size = 500, chunk_overlap = 250)
 
 # Set up an array of files to add to Weaviate
-folder_path = "data/voting-test"
+folder_path = "data/helmond/"
 subfolders = [f.path for f in os.scandir(folder_path) if f.is_dir()]
 files = []
 files_in_root = [f.path for f in os.scandir(folder_path) if f.is_file() and f.name.endswith(".pdf")]

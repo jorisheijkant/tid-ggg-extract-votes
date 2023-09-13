@@ -1,0 +1,175 @@
+[
+    {
+        "title": "Raadsvoorstel 71",
+        "vote": "Unaniem aangenomen.",
+        "pro": [
+            "GL",
+            "VVD",
+            "HH",
+            "SP",
+            "CDA",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ],
+        "against": []
+    },
+    {
+        "title": "Regionaal Veiligheidsplan",
+        "vote": "aangenomen",
+        "pro": [
+            "GL",
+            "VVD",
+            "HH",
+            "SP",
+            "CDA",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ],
+        "against": []
+    },
+    {
+        "title": "Motie Belang van vrijwilligers",
+        "vote": "De motie is aangenomen",
+        "pro": [
+            "GL",
+            "HH",
+            "SP",
+            "CDA",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "DENK",
+            "FMH"
+        ],
+        "against": [
+            "VVD",
+            "FvD"
+        ]
+    },
+    {
+        "title": "motie Huurders in De Cacaofabriek",
+        "vote": "De motie is aangenomen",
+        "pro": [
+            "GL",
+            "HH",
+            "SP",
+            "CDA",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ],
+        "against": [
+            "VVD",
+            "M\u00ec Hellemonders"
+        ]
+    },
+    {
+        "title": "onbekend",
+        "vote": "De motie is aangenomen",
+        "pro": [],
+        "against": [
+            "VVD",
+            "M\u00ec Hellemonders"
+        ]
+    },
+    {
+        "title": "onbekend",
+        "vote": "De motie is verworpen",
+        "pro": [
+            "CDA",
+            "VVD",
+            "Forum voor Democratie",
+            "helder Helmond",
+            "M\u00ec Hellemonders"
+        ],
+        "against": [
+            "GL",
+            "SP",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ]
+    },
+    {
+        "title": "Amendement",
+        "vote": "Verworpen",
+        "pro": [
+            "VVD",
+            "M\u00ec Hellemonders",
+            "Helder Helmond",
+            "Forum voor Democratie"
+        ],
+        "against": [
+            "GL",
+            "HH",
+            "SP",
+            "CDA",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ]
+    },
+    {
+        "title": "amendement",
+        "vote": "verworpen",
+        "pro": [
+            "VVD",
+            "M\u00ec Hellemonders",
+            "Helder Helmond",
+            "Forum voor Democratie"
+        ],
+        "against": [
+            "GL",
+            "HH",
+            "SP",
+            "CDA",
+            "D66",
+            "LS",
+            "50PLUS",
+            "PvdA",
+            "FvD",
+            "DENK",
+            "FMH"
+        ]
+    },
+    {
+        "title": "Raadsvoorstel",
+        "vote": "Er zijn twee moties aangenomen",
+        "pro": [],
+        "against": []
+    },
+    {
+        "title": "onbekend",
+        "vote": "aangenomen",
+        "pro": [],
+        "against": [
+            "VVD",
+            "Forum voor Democratie",
+            "Helder Helmond",
+            "M\u00ec Hellemonders"
+        ]
+    }
+]

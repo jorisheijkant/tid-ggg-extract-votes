@@ -1,6 +1,7 @@
 # In this script we devide a document into chunks, send them to a GPT to see if we can extract possible votings, and then write out the results to json
 import os
 import json
+import time
 
 # Import other needed libraries
 from langchain import PromptTemplate, LLMChain
@@ -11,11 +12,16 @@ import constants
 os.environ["OPENAI_API_KEY"] = constants.APIKEY
 os.environ["OPENAI_APIKEY"] = constants.APIKEY
 
-# Set up an array of files to add to Weaviate
-folder_path = "data/voting-test/"
+# Set up variables
+folder_path = "data/helmond/"
 chunks_folder_path = f"{folder_path}chunks/"
 votes_folder_path = f"{folder_path}votes/"
+overwrite = False
 
+# Import the voting dictionary for pre-selection
+import voting_dictionary
+voting_dictionary = voting_dictionary.minimal_voting_dictionary
+    
 # Create votes folder if it doesn't exist
 if not os.path.exists(votes_folder_path):
     os.makedirs(votes_folder_path)
@@ -73,11 +79,22 @@ llm_chain = LLMChain(
 
 # Loop over files
 for file in files:
+    # Check if the file has already been processed
+    file_name = file.split("/")[-1]
+    # Cut off the .json extension
+    file_name = file_name[:-5]
+    full_file_name = f"{votes_folder_path}{file_name}"
+    print(f"Checking if file {full_file_name} already exists")
+    if (os.path.exists(full_file_name) and not overwrite):
+        print(f"File {file_name} already exists in the votes folder, skipping")
+        continue
+
     # Set up variables
     print(f"Processing chunks from file {file}")
     file_splits = []
     voting_results = []
-    file_name = file.split("/")[-1]
+    amount_containing_voting_term = 0
+    to_llm = []
 
     # Open the file
     with open(file) as json_file:
@@ -86,16 +103,35 @@ for file in files:
         for chunk in data:
             file_splits.append(chunk)
 
-        print(f"Found {len(file_splits)} chunks in total to process")
+        print(f"Found {len(file_splits)} chunks in this file to process")
 
     # Loop over chunks
-    for split in file_splits:
+    for index, split in enumerate(file_splits):
         # Get the page content from the split
         split_content = split["text"]
 
+        # Check if the split contains any of the voting dictionary terms
+        contains_voting_term = False
+        for term in voting_dictionary:
+            if (term in split_content):
+                contains_voting_term = True
+                break
+        
+        # If the split doesn't contain any voting terms, skip it
+        if (not contains_voting_term):
+            continue
+
+        # Add the split to the to_llm array
+        to_llm.append(split)
+    
+    print(f"Found {len(to_llm)} chunks containing voting terms (out of {len(file_splits)} total chunks)")
+
+    for llm_index, llm_split in enumerate(to_llm):
+        llm_split_content = llm_split["text"]
+        print(f"Processing chunk {llm_index} of {len(to_llm)} for file {file_name}")
         # Run the LLM chain
-        result = llm_chain({"context": split_content, "parties_text": parties_text})
-        # Delete newlines from the result
+        result = llm_chain({"context": llm_split_content, "parties_text": parties_text})
+
         if (result):
             result_text = result["text"]
             result_text = result_text.replace("\n", "")  
@@ -104,12 +140,9 @@ for file in files:
                 voting_results.append(result_text)
             else:
                 print("No voting found")
-
-    print(voting_results)
-
-    # Write raw results
-    with open(f"{votes_folder_path}/{file_name}-raw.json", 'w') as outfile:
-        json.dump(voting_results, outfile, indent=4)
+        
+        # Sleep to prevent rate limiting
+        time.sleep(2)
 
     parsed_data = [json.loads(item) for item in voting_results]
     print(parsed_data)
