@@ -8,7 +8,7 @@ from langchain import PromptTemplate, LLMChain
 from langchain.llms import Ollama
 
 # Set up variables
-folder_path = "data/helmond/"
+folder_path = "data/voting-test/"
 chunks_folder_path = f"{folder_path}chunks/"
 votes_folder_path = f"{folder_path}votes/"
 overwrite = False
@@ -27,7 +27,7 @@ files_in_root = [f.path for f in os.scandir(
 for file in files_in_root:
     files.append(file)
 
-print(f"Found {len(files)} josn chunks files in the {chunks_folder_path} folder")
+print(f"Found {len(files)} json chunks files in the {chunks_folder_path} folder")
 
 for file in files:
     print(file)
@@ -65,9 +65,25 @@ Context:
 {context}
 """
 
+prompt_template_english = """
+You are examining a piece of text from a municipal council meeting or other municipal document. You are going to see if you can extract the voting behavior of different parties from it. Check if you can find a vote or motion in the context below. Pay attention to words like "raadsvoorstel" (council proposal) or "motie" (motion), or terms like "stemmen" (vote) and "aangenomen" (adopted). If you think it is a vote or motion, return the vote as a JSON object with the following structure:
+
+- title: the title of the vote
+- vote: the textual description of the vote result
+- pro: the parties that voted in favor (in an array)
+ - against: the parties that voted against (in an array) If you cannot find a vote, return Null (with a capital N). 
+If there is a situation where only supporters or opponents are mentioned, or all parties vote unanimously, fill the pro or against array with these parties:
+{parties_text} 
+Retrieve a maximum of one vote per context. If you find multiple votes, take the first one.
+Context:
+{context}
+
+MAKE SURE TO ANSWER WITH A VALID JSON OBJECT and only that object AS DESCRIBED ABOVE! THIS IS CRITICAL. So no surrounding text! Also no code marks (```). Just the json object. If you do provide text outside the object, the answer will be rejected.
+"""
+
 llm = Ollama(model="vicuna")
 
-prompt = PromptTemplate(template=prompt_template, input_variables=["context", "parties_text"])
+prompt = PromptTemplate(template=prompt_template_english, input_variables=["context", "parties_text"])
 
 llm_chain = LLMChain(
     llm=llm,
@@ -141,9 +157,16 @@ for file in files:
         # Sleep to prevent rate limiting
         time.sleep(2)
 
-    parsed_data = [json.loads(item) for item in voting_results]
+
+    parsed_data = []
+    for item in voting_results:
+        try:
+            parsed_item = json.loads(item)
+            parsed_data.append(parsed_item)
+        except json.JSONDecodeError:
+            continue
     print(parsed_data)
 
     # Write out the voting results to json
-    with open(f"{votes_folder_path}/{file_name}-llama.json", 'w') as outfile:
+    with open(f"{votes_folder_path}/{file_name}-vicuna.json", 'w') as outfile:
         json.dump(parsed_data, outfile, indent=4)

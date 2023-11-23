@@ -5,3 +5,5 @@ persist/
 .chroma/
 data/**/*.pdf
 !data/.gitkeep
+firebase-admin.json
+```
